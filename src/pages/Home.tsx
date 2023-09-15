@@ -10,11 +10,9 @@ type Props = {};
 const Home = (props: Props) => {
   return (
     <>
-      <Navbar />
       <Tags />
       <VideoGrid />
       <Pagination />
-      <Footer />
     </>
   );
 };
