@@ -1,9 +1,9 @@
 import axiosInstance from "../../utils/axiosInstance";
-import { VideoTypes } from "../features/counter/Videos";
+import { VideoTypes } from "../features/Videos/Videos";
 
 const videosApi = async (): Promise<VideoTypes[]> => {
-  const response: VideoTypes[] = await axiosInstance.get("/video");
-  return response;
+  const response = await axiosInstance.get("/videos");
+  return response.data;
 };
 
 export default videosApi;
