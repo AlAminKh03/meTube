@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import videosApi from "./VideosApi";
+import videoApi from "./VideoApi";
 
 export interface VideoTypes {
-  id: number;
+  id: number | null;
   title: string;
   description: string;
   author: string;
@@ -18,49 +18,63 @@ export interface VideoTypes {
 }
 
 interface InitialStateTypes {
-  videos: VideoTypes[];
+  video: VideoTypes;
   isLoading: boolean;
   isError: boolean;
   error: string;
 }
 const initialState: InitialStateTypes = {
-  videos: [],
+  video: {
+    id: null,
+    title: "",
+    description: "",
+    author: "",
+    avatar: "",
+    date: "",
+    duration: "",
+    views: "",
+    link: "",
+    thumbnail: "",
+    tags: [],
+    likes: 0,
+    unlikes: 0,
+  },
   isLoading: false,
   isError: false,
   error: "",
 };
 
-export const fetchVideosAsync = createAsyncThunk(
+export const fetchVideoAsync = createAsyncThunk(
   "videos/fetchVideos",
-  async () => {
-    const videos: VideoTypes[] = await videosApi();
+  async (id: number) => {
+    const videos: VideoTypes = await videoApi(id);
     return videos;
   }
 );
 
-const videoSlice = createSlice({
+const singleVideoSlice = createSlice({
   name: "videos",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchVideosAsync.pending, (state) => {
+      .addCase(fetchVideoAsync.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
       })
-      .addCase(fetchVideosAsync.fulfilled, (state, action) => {
+      .addCase(fetchVideoAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.videos = action.payload;
+        state.video = action.payload;
         state.error = "";
         state.isError = false;
       })
-      .addCase(fetchVideosAsync.rejected, (state, action) => {
+      .addCase(fetchVideoAsync.rejected, (state, action) => {
         state.isLoading = false;
-        state.videos = [];
+        state.video = initialState.video;
         state.error = action.error?.message || " ";
         state.isError = true;
       });
   },
 });
 
-export default videoSlice.reducer;
+export default singleVideoSlice.reducer;

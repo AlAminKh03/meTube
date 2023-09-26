@@ -4,7 +4,7 @@ const initialState = {
   value: 0,
 };
 
-const counterSlice = createSlice({
+const counterSlice: any = createSlice({
   name: "counter",
   initialState,
   reducers: {

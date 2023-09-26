@@ -4,17 +4,7 @@ interface videoTypes {
   video: VideoTypes;
 }
 const VideoGridItem = ({ video }: videoTypes) => {
-  const {
-    id,
-    title,
-    description,
-    duration,
-    author,
-    avatar,
-    date,
-    views,
-    thumbnail,
-  } = video;
+  const { id, title, duration, author, avatar, date, views, thumbnail } = video;
   return (
     <div className="col-span-12 sm:col-span-6 md:col-span-3 duration-300 hover:scale-[1.03]">
       <div className="w-full flex flex-col">
@@ -32,7 +22,7 @@ const VideoGridItem = ({ video }: videoTypes) => {
           </p>
         </div>
 
-        <div className="flex flex-row mt-2 gap-1">
+        <div className="flex flex-row mt-2">
           <Link to={`videos/${id}`} className="shrink-0">
             <img
               src={avatar}
@@ -41,7 +31,7 @@ const VideoGridItem = ({ video }: videoTypes) => {
             />
           </Link>
 
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start ">
             <Link to={`videos/${id}`}>
               <p className="text-slate-900 text-sm font-semibold">{title}</p>
             </Link>

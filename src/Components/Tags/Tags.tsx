@@ -1,17 +1,24 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Tag from "./Tag";
+import { AppDispatch, RootState } from "../../redux/app/Store";
+import { useEffect } from "react";
+import { fetchTagsAsync } from "../../redux/features/tags/Tags";
 
-type Props = {};
-
-const Tags = (props: Props) => {
-  return (
+const Tags = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const { tags } = useSelector((state: RootState) => state.tags);
+  useEffect(() => {
+    dispatch(fetchTagsAsync());
+  }, [dispatch]);
+  return tags?.length > 0 ? (
     <section>
-      <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 border-b overflow-y-auto">
-        <div className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full cursor-pointer">
-          react
-        </div>
+      <div className="max-w-7xl mx-auto px-5 py-6 lg:px-0 flex gap-2 border-b overflow-y-scroll">
+        {tags.map((tag) => (
+          <Tag key={tag.id} title={tag.title} />
+        ))}
       </div>
     </section>
-  );
+  ) : null;
 };
 
 export default Tags;

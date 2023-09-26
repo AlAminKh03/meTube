@@ -16,14 +16,18 @@ const VideoGrid = (props: Props) => {
   }, [dispatch]);
   let content: React.ReactNode;
   if (isLoading) content = <div className="col-span-12">Loading....</div>;
+
   if (!isLoading && isError)
     content = <div className="col-span-12">{error}</div>;
+
   if (!isLoading && !isError && videos.length <= 0)
     content = <div className="col-span-12">No video found</div>;
+
   if (!isError && !isLoading && videos.length > 0)
     content = videos.map((video) => {
       return <VideoGridItem key={video.id} video={video} />;
     });
+
   return (
     <section className="pt-12">
       <section className="pt-12">
