@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import Videos from "../features/Videos/Videos";
 import Tags from "../features/tags/Tags";
 import singleVideo from "../features/Video/VideoSlice";
+import theme from "../features/Theme/theme";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     videos: Videos,
     tags: Tags,
     video: singleVideo,
+    theme: theme,
   },
 });
 
