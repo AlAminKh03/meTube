@@ -4,6 +4,8 @@ import Videos from "../features/Videos/Videos";
 import Tags from "../features/tags/Tags";
 import singleVideo from "../features/Video/VideoSlice";
 import theme from "../features/Theme/theme";
+import relatedVideosSlice from "../features/relatedVideosSlice/relatedVideosSlice";
+import filterSlice from "../features/filterSlice/filterSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +14,8 @@ const store = configureStore({
     tags: Tags,
     video: singleVideo,
     theme: theme,
+    relatedVideos: relatedVideosSlice,
+    filter: filterSlice,
   },
 });
 

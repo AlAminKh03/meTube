@@ -1,46 +1,27 @@
-import Navbar from "../Components/Navbar/Navbar";
 import Player from "../Components/Description/Player";
 import Description from "../Components/Description/Description";
 import RelatedVideoList from "../Components/list/RelatedVideoList";
-import Footer from "../Components/Footer";
 import { useParams } from "react-router-dom";
 import { fetchVideoAsync } from "../redux/features/Video/VideoSlice";
 import { useEffect } from "react";
 import { AppDispatch, RootState } from "../redux/app/Store";
 import { useDispatch, useSelector } from "react-redux";
 
-type Props = {};
-
 const Video = () => {
   const { videoId } = useParams();
+  console.log(videoId);
 
-  const { isError, isLoading, video } = useSelector(
-    (state: RootState) => state.video
-  );
+  const { isLoading, video } = useSelector((state: RootState) => state.video);
 
   console.log(video);
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchVideoAsync(Number(videoId!)));
+    dispatch(fetchVideoAsync(Number(videoId)));
   }, []);
 
   const { theme } = useSelector((state: RootState) => state.theme);
 
-  const {
-    title,
-    description,
-    avatar,
-    likes,
-    unlikes,
-    link,
-    tags,
-    thumbnail,
-    id,
-    author,
-    date,
-    duration,
-    views,
-  } = video;
+  const { title, description, likes, unlikes, link, tags, id, date } = video;
 
   if (isLoading) {
     return <h2>Loading.....</h2>;
@@ -69,7 +50,7 @@ const Video = () => {
               />
             </div>
 
-            <RelatedVideoList />
+            <RelatedVideoList id={id} tags={tags} />
           </div>
         </div>
       </section>

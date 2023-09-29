@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import videoApi from "./VideoApi";
 
 export interface VideoTypes {
-  id: number | null;
+  id: number;
   title: string;
   description: string;
   author: string;
@@ -25,7 +25,7 @@ interface InitialStateTypes {
 }
 const initialState: InitialStateTypes = {
   video: {
-    id: null,
+    id: 0,
     title: "",
     description: "",
     author: "",
@@ -45,7 +45,7 @@ const initialState: InitialStateTypes = {
 };
 
 export const fetchVideoAsync = createAsyncThunk(
-  "videos/fetchVideos",
+  "video/fetchVideo",
   async (id: number) => {
     const videos: VideoTypes = await videoApi(id);
     return videos;
@@ -53,7 +53,7 @@ export const fetchVideoAsync = createAsyncThunk(
 );
 
 const singleVideoSlice = createSlice({
-  name: "videos",
+  name: "video",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

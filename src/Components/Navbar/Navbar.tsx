@@ -5,14 +5,10 @@ import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/app/Store";
 import { setTheme } from "../../redux/features/Theme/theme";
-import { useEffect } from "react";
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   const { theme } = useSelector((state: RootState) => state.theme);
   const dispatch: AppDispatch = useDispatch();
-  console.log(theme);
 
   return (
     <nav

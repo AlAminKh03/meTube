@@ -6,14 +6,15 @@ import { AppDispatch, RootState } from "../../redux/app/Store";
 
 type Props = {};
 
-const VideoGrid = (props: Props) => {
+const VideoGrid = () => {
   const dispatch: AppDispatch = useDispatch();
   const { isError, videos, isLoading, error } = useSelector(
     (state: RootState) => state.videos
   );
+  const { tags, search } = useSelector((state: RootState) => state.filter);
   useEffect(() => {
-    dispatch(fetchVideosAsync());
-  }, [dispatch]);
+    dispatch(fetchVideosAsync({ tags, search }));
+  }, [dispatch, tags, search]);
   let content: React.ReactNode;
   if (isLoading) content = <div className="col-span-12">Loading....</div>;
 

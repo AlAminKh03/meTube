@@ -17,6 +17,11 @@ export interface VideoTypes {
   unlikes: number;
 }
 
+export interface VideoParameters {
+  tags: string[];
+  search: string;
+}
+
 interface InitialStateTypes {
   videos: VideoTypes[];
   isLoading: boolean;
@@ -32,8 +37,8 @@ const initialState: InitialStateTypes = {
 
 export const fetchVideosAsync = createAsyncThunk(
   "videos/fetchVideos",
-  async () => {
-    const videos: VideoTypes[] = await videosApi();
+  async ({ tags, search }: VideoParameters) => {
+    const videos: VideoTypes[] = await videosApi(tags, search);
     return videos;
   }
 );
